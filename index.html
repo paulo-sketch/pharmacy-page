@@ -22,3 +22,54 @@
     </main>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Locator</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/jsLKmRVo5Z66QvWXA=" crossorigin=""/>
+</head>
+<body>
+    <header>
+        <h1>Pharmacy List</h1>
+    </header>
+    <main>
+        <section class="pharmacy-list">
+            <h2>Nearby Pharmacies</h2>
+            <ul>
+                <li>Pharmacy 1 - 123 Main St</li>
+                <li>Pharmacy 2 - 456 Oak Ave</li>
+            </ul>
+        </section>
+        <section class="map">
+            <h2>Location Map</h2>
+            <div id="map" style="height: 400px; width: 100%;"></div>
+        </section>
+    </main>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([37.7749, -122.4194], 12); // Center on San Francisco, zoom level 12
+
+        // Add OpenStreetMap tiles (free)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add pharmacy markers
+        const pharmacies = [
+            { lat: 37.7749, lng: -122.4194, name: "Pharmacy 1" },
+            { lat: 37.7859, lng: -122.4364, name: "Pharmacy 2" }
+        ];
+        pharmacies.forEach(pharmacy => {
+            L.marker([pharmacy.lat, pharmacy.lng])
+                .addTo(map)
+                .bindPopup(pharmacy.name); // Popup with pharmacy name
+        });
+    </script>
+</body>
+</html>
